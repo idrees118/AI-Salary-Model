@@ -1,115 +1,102 @@
- AI Job Salary & Role Prediction – Project Summary
-📁 Dataset
-Filename: ai_job_dataset.csv
+# 🧠 AI Job Salary & Role Prediction – Project Summary
 
-Samples: 15,000 rows
+## 📁 Dataset
+- **Filename:** `ai_job_dataset.csv`
+- **Samples:** 15,000 rows
+- **Features:** 19 columns
+- **Language:** Python
 
-Features: 19 columns
+## 🎯 Objectives
+- Predict AI job salaries based on features
+- Classify job types (e.g. remote/hybrid/on-site)
+- Analyze job requirements using NLP
 
-Language: Python
+---
 
-🎯 Objectives
-Predict AI job salaries based on features
+## 🔄 Step-by-Step Workflow Overview
 
-Classify job types (e.g. remote/hybrid/on-site)
+### ✅ STEP 1 – Dataset Overview & Cleaning
+- Successfully loaded a clean dataset with 15,000 rows and 19 columns
+- No missing values detected
+- Converted `posting_date` and `application_deadline` to datetime format
+- Normalized all categorical fields (lowercase + whitespace stripping)
 
-Analyze job requirements using NLP
+---
 
-🔄 Step-by-Step Workflow Overview
-✅ STEP 1 – Dataset Overview & Cleaning
-Successfully loaded a clean dataset with 15,000 rows and 19 columns.
+### 🔧 STEP 2 – Feature Preparation
+- Dropped irrelevant fields: `job_id`, `company_name`, `posting_date`
+- Encoded categorical columns using `LabelEncoder`
+- **Target variable:** `salary_usd`
+- Final shape for modeling:
+  - Feature matrix (X): 14 columns
+  - Target vector (y): `salary_usd`
 
-No missing values detected.
+---
 
-Converted posting_date and application_deadline to datetime format.
+### 📊 STEP 3 – Exploratory Data Analysis (EDA)
+Created visualizations to identify patterns and trends:
+- Salary distribution (histogram)
+- Salary comparison by:
+  - Experience level
+  - Employment type
+  - Remote ratio
+  - Company size
+  - Top 10 most frequent industries
 
-Normalized all categorical fields (lowercase + whitespace stripping).
+**Key Insights:**
+- Executives earn significantly more than juniors
+- Remote roles have broader salary ranges
+- Large companies offer higher average salaries than small ones
 
-🔧 STEP 2 – Feature Preparation
-Dropped irrelevant fields such as job_id, company_name, posting_date.
+---
 
-Encoded categorical columns using LabelEncoder.
+### 🛠️ STEP 4 – Feature Engineering
+- Encoded all categorical features numerically
+- Used `StandardScaler` for normalization
+- Final datasets prepared for ML (X, y split)
 
-Target variable selected: salary_usd
+---
 
-Final shape for modeling:
+### 📈 STEP 5 – Salary Prediction Using Regression
+Trained the following models to predict `salary_usd`:
+- Linear Regression
+- Random Forest Regressor
+- XGBoost Regressor
 
-Feature matrix (X): 14 columns
+**Conclusion:**  
+✅ **XGBoost** is the most accurate model for salary prediction.
 
-Target vector (y): salary_usd
+---
 
-📊 STEP 3 – Exploratory Data Analysis (EDA)
-Created powerful visualizations to identify patterns and trends:
-
-Salary Distribution (histogram)
-
-Salary comparison by:
-
-Experience level
-
-Employment type
-
-Remote ratio
-
-Company size
-
-Top 10 most frequent industries
-
-🔍 Key Insights:
-Executives earn significantly more than juniors.
-
-Remote roles have broader salary ranges.
-
-Large companies offer higher average salaries than small ones.
-
-🛠️ STEP 4 – Feature Engineering
-All categorical features encoded numerically.
-
-Used StandardScaler for feature normalization.
-
-Prepared datasets for machine learning (X, y split).
-
-📈 STEP 5 – Salary Prediction Using Regression
-Trained 3 different models to predict salary_usd:
-
-Linear Regression
-
-Random Forest Regressor
-
-XGBoost Regressor
-
-🔚 Conclusion:
-✅ XGBoost is the most accurate model for salary prediction in this dataset.
-
-📉 STEP 6 – Visual Model Comparison
+### 📉 STEP 6 – Visual Model Comparison
 Plotted model performance metrics:
+- R² Score
+- MAE (Mean Absolute Error)
+- RMSE (Root Mean Squared Error)
 
-R² Score
+**Result:**  
+📌 **XGBoost outperformed** both Linear Regression and Random Forest in all metrics.
 
-MAE (Mean Absolute Error)
+---
 
-RMSE (Root Mean Squared Error)
+### 🏷️ STEP 7 – Classification: Predicting Remote Work Type
+- **Target:** `remote_ratio` (0 = On-site, 50 = Hybrid, 100 = Remote)
 
-Result:
-📌 XGBoost clearly outperformed both Linear Regression and Random Forest in all metrics.
+**Models Used:**
+- Logistic Regression
+- Random Forest Classifier
 
-🏷️ STEP 7 – Classification: Predicting Remote Work Type
-Target: remote_ratio
-(0 = On-site, 50 = Hybrid, 100 = Remote)
+**Result:**  
+❌ Both models only achieved ~33% accuracy  
+⚠️ Indicates that current features are not strong predictors for remote status
 
-Models Used:
-Logistic Regression
+---
 
-Random Forest Classifier
+### 🧾 STEP 8 – NLP Analysis of `required_skills`
+- Tokenized skills using `CountVectorizer` (split by comma)
+- Counted and visualized top 20 most frequent skills
 
-Result:
-❌ Both models only achieved ~33% accuracy.
-📌 Indicates current features are not strong predictors for remote status.
+**Top Skills Identified:**
+`Python`, `SQL`, `TensorFlow`, `Docker`, `AWS`, `Linux`, `Kubernetes`, `NLP`
 
-🧾 STEP 8 – NLP Analysis of required_skills
-Tokenized skills using CountVectorizer (split by comma).
-
-Counted and visualized the top 20 most frequent skills.
-
-🔝 Top Skills Identified:
-Python, SQL, TensorFlow, Docker, AWS, Linux, Kubernetes, NLP
+📌 This step sets the foundation for a **skill-based job recommender system**
